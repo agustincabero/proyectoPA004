@@ -1,3 +1,6 @@
+var palette = document.getElementById('paleta');
+var pixelGrid = document.getElementById('grilla-pixels');
+
 var nombreColores = ['White', 'LightYellow',
   'LemonChiffon', 'LightGoldenrodYellow', 'PapayaWhip', 'Moccasin', 'PeachPuff', 'PaleGoldenrod', 'Bisque', 'NavajoWhite', 'Wheat', 'BurlyWood', 'Tan',
   'Khaki', 'Yellow', 'Gold', 'Orange', 'DarkOrange', 'OrangeRed', 'Tomato', 'Coral', 'DarkSalmon', 'LightSalmon', 'LightCoral', 'Salmon', 'PaleVioletRed',
@@ -33,3 +36,16 @@ colorPersonalizado.addEventListener('change',
 
   })
 );
+
+function colorPaletteMaker(){
+  for (var i = 0; i < nombreColores.length; i++) {
+    var newDiv = document.createElement('div');
+    newDiv.style.backgroundColor = nombreColores[i];
+    newDiv.classList.add('color-paleta');
+    paleta.appendChild(newDiv);    
+  }
+}
+
+colorPaletteMaker();
+
+
