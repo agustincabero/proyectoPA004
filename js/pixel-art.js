@@ -1,5 +1,5 @@
 var palette = document.getElementById('paleta');
-var pixelGrid = document.getElementById('grilla-pixels');
+var pixelGrid = document.getElementById('grilla-pixeles');
 
 var nombreColores = ['White', 'LightYellow',
   'LemonChiffon', 'LightGoldenrodYellow', 'PapayaWhip', 'Moccasin', 'PeachPuff', 'PaleGoldenrod', 'Bisque', 'NavajoWhite', 'Wheat', 'BurlyWood', 'Tan',
@@ -46,6 +46,13 @@ function colorPaletteMaker(){
   }
 }
 
-colorPaletteMaker();
+function pixelsGridMaker(){
+  for (var i = 0; i < 1750; i++) {
+    var newPix = document.createElement('div');
+    pixelGrid.appendChild(newPix);    
+  }
+}
 
+colorPaletteMaker();
+pixelsGridMaker();
 
