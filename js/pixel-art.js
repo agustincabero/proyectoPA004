@@ -1,5 +1,6 @@
 var palette = document.getElementById('paleta');
 var pixelGrid = document.getElementById('grilla-pixeles');
+var status;
 
 var nombreColores = ['White', 'LightYellow',
   'LemonChiffon', 'LightGoldenrodYellow', 'PapayaWhip', 'Moccasin', 'PeachPuff', 'PaleGoldenrod', 'Bisque', 'NavajoWhite', 'Wheat', 'BurlyWood', 'Tan',
@@ -32,8 +33,7 @@ colorPersonalizado.addEventListener('change',
     // Se guarda el color de la rueda en colorActual
     colorActual = colorPersonalizado.value;
     // Completar para que cambie el indicador-de-color al colorActual
-
-
+    document.getElementById('indicador-de-color').style.backgroundColor = colorActual;
   })
 );
 
@@ -49,10 +49,49 @@ function colorPaletteMaker(){
 function pixelsGridMaker(){
   for (var i = 0; i < 1750; i++) {
     var newPix = document.createElement('div');
+    newPix.classList.add('pixel');
     pixelGrid.appendChild(newPix);    
   }
 }
 
+function colorSelect(){
+  for (var i = 0; i < nombreColores.length; i++) {
+    var colors = document.getElementsByClassName('color-paleta');
+    colors[i].addEventListener('click', function(e){
+      document.getElementById('indicador-de-color').style.backgroundColor = e.target.style.backgroundColor;
+    })
+  }
+}
+
+function paintPixel(){
+  for (var i = 0; i < 1750; i++) {
+    var pixels = document.getElementsByClassName('pixel');
+    pixels[i].addEventListener('click', function(e){
+      e.target.style.backgroundColor = document.getElementById('indicador-de-color').style.backgroundColor;
+    })
+    if(status){      
+      pixels[i].addEventListener('mouseover', function(e){
+      e.target.style.backgroundColor = document.getElementById('indicador-de-color').style.backgroundColor;
+      })   
+    }   
+  }
+}
+
+//TODO hacer que funcione esto! Cambia la variable de forma local, pero no global.
+function mouseStatus(){
+  var grid = document.getElementById('grilla-pixeles');  
+  grid.addEventListener('mousedown', function() {
+    status = true;
+    console.log(status);
+  })
+  window.addEventListener('mouseup', function() {
+    status = false;
+    console.log(status);
+  })
+}
+
 colorPaletteMaker();
 pixelsGridMaker();
-
+colorSelect();
+paintPixel();
+mouseStatus();
