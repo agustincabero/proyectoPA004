@@ -1,6 +1,6 @@
 var palette = document.getElementById('paleta');
 var pixelGrid = document.getElementById('grilla-pixeles');
-var status;
+var statusMouse = false;
 
 var nombreColores = ['White', 'LightYellow',
   'LemonChiffon', 'LightGoldenrodYellow', 'PapayaWhip', 'Moccasin', 'PeachPuff', 'PaleGoldenrod', 'Bisque', 'NavajoWhite', 'Wheat', 'BurlyWood', 'Tan',
@@ -49,7 +49,6 @@ function colorPaletteMaker(){
 function pixelsGridMaker(){
   for (var i = 0; i < 1750; i++) {
     var newPix = document.createElement('div');
-    newPix.classList.add('pixel');
     pixelGrid.appendChild(newPix);    
   }
 }
@@ -64,29 +63,26 @@ function colorSelect(){
 }
 
 function paintPixel(){
-  for (var i = 0; i < 1750; i++) {
-    var pixels = document.getElementsByClassName('pixel');
-    pixels[i].addEventListener('click', function(e){
-      e.target.style.backgroundColor = document.getElementById('indicador-de-color').style.backgroundColor;
-    })
-    if(status){      
-      pixels[i].addEventListener('mouseover', function(e){
-      e.target.style.backgroundColor = document.getElementById('indicador-de-color').style.backgroundColor;
-      })   
-    }   
-  }
+  pixelGrid.addEventListener('click', function(e){
+    paint(e);
+    })          
+  pixelGrid.addEventListener('mouseover', function(e){
+    if(statusMouse){
+      paint(e);
+    }  
+  })  
 }
 
-//TODO hacer que funcione esto! Cambia la variable de forma local, pero no global.
-function mouseStatus(){
-  var grid = document.getElementById('grilla-pixeles');  
-  grid.addEventListener('mousedown', function() {
-    status = true;
-    console.log(status);
+function paint(e) {
+  e.target.style.backgroundColor = document.getElementById('indicador-de-color').style.backgroundColor;
+}
+
+function mouseStatus(){    
+  pixelGrid.addEventListener('mousedown', function() {
+    statusMouse = true;
   })
-  window.addEventListener('mouseup', function() {
-    status = false;
-    console.log(status);
+  document.addEventListener('mouseup', function() {
+    statusMouse = false;
   })
 }
 
